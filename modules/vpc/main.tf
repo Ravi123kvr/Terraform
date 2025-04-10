@@ -62,12 +62,16 @@ resource "aws_route_table" "Private_RT" {
     nat_gateway_id = aws_nat_gateway.My_NatGW
   }
 }
+resource "aws_eip" "nat" {
+  domain = "vpc"
+}
 
 resource "aws_nat_gateway" "My_NatGW" {
   subnet_id = aws_vpc.subnet.PublicSubnet
   connectivity_type = "Public"
+
   tags = {
-    Name = var.Nat_Gateway
+    Name = var.Nat_Gateway 
   }
 }
 
